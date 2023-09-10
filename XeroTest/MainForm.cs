@@ -209,7 +209,7 @@ namespace XeroPresence
                         _ping = jsonData.game.room.match.playerData.ping;
                         _team = jsonData.game.room.match.playerData.team.name;
 
-                        if (_playerdata != null)
+                        if (_playerdata.isIngame != false)
                         {
                             _gameState = jsonData.game.room.match.gameState.name;
                             _gameTimeState = jsonData.game.room.match.gameTimeState.name;
