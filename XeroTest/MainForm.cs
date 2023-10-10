@@ -282,8 +282,13 @@ namespace XeroPresence
                                     discord.UpdateState($"{_name} | {_gameTimeState} | {_scoreAlpha} - {_scoreBeta}");
 
                                 int remainingSeconds = (_timelimit / 2) - _roundTime;
-                                discord.UpdateStartTime(DateTime.UtcNow.Subtract(TimeSpan.FromSeconds(_roundTime)));
-                                discord.UpdateEndTime(DateTime.UtcNow.AddSeconds(remainingSeconds));
+                                if (_gameTimeState == "FirstHalf" || _gameTimeState == "SecondHalf")
+                                {
+                                    discord.UpdateStartTime(DateTime.UtcNow.Subtract(TimeSpan.FromSeconds(_roundTime)));
+                                    discord.UpdateEndTime(DateTime.UtcNow.AddSeconds(remainingSeconds));
+                                }
+                                else
+                                    discord.UpdateClearTime();
                             }
                             else if (_mode == "Deathmatch")
                             {
@@ -342,8 +347,13 @@ namespace XeroPresence
                                     discord.UpdateState($"{_name} | {_gameTimeState} | {_scoreAlpha} - {_scoreBeta}");
 
                                 int remainingSeconds = (_timelimit / 2) - _roundTime;
-                                discord.UpdateStartTime(DateTime.UtcNow.Subtract(TimeSpan.FromSeconds(_roundTime)));
-                                discord.UpdateEndTime(DateTime.UtcNow.AddSeconds(remainingSeconds));
+                                if (_gameTimeState == "FirstHalf" || _gameTimeState == "SecondHalf")
+                                {
+                                    discord.UpdateStartTime(DateTime.UtcNow.Subtract(TimeSpan.FromSeconds(_roundTime)));
+                                    discord.UpdateEndTime(DateTime.UtcNow.AddSeconds(remainingSeconds));
+                                }
+                                else
+                                    discord.UpdateClearTime();
                             }
                             else if (_mode == "Battle Royal")
                             {
