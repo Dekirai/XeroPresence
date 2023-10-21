@@ -88,6 +88,7 @@ namespace XeroPresence
 
             bt_login.Text = "Logging in...";
             timer1.Start();
+            cb_Profiles.Enabled = false;
             tb_accesskey.ReadOnly = true;
             tb_accesskeysecret.ReadOnly = true;
             bt_login.Enabled = false;
@@ -169,6 +170,7 @@ namespace XeroPresence
                     }
 
                     bt_login.Text = "Logged in";
+                    cb_Profiles.Enabled = true;
 
                     var _isOnline = jsonData.game.online;
                     var _isServer = jsonData.game.server;
@@ -770,6 +772,8 @@ namespace XeroPresence
                     tb_accesskeysecret.Text = iniData[selectedSection]["SecretAccessKey"];
                 else
                     tb_accesskeysecret.Text = "Key not found";
+                if (bt_login.Text == "Logged in")
+                    MessageBox.Show("You seem to be already logged in to a different account.\nPlease restart the program to take affect.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
