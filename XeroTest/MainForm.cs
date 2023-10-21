@@ -762,22 +762,14 @@ namespace XeroPresence
             if (iniData.ContainsKey(selectedSection))
             {
                 if (iniData[selectedSection].ContainsKey("AccessKeyID"))
-                {
                     tb_accesskey.Text = iniData[selectedSection]["AccessKeyID"];
-                }
                 else
-                {
                     tb_accesskey.Text = "Key not found";
-                }
 
                 if (iniData[selectedSection].ContainsKey("SecretAccessKey"))
-                {
                     tb_accesskeysecret.Text = iniData[selectedSection]["SecretAccessKey"];
-                }
                 else
-                {
                     tb_accesskeysecret.Text = "Key not found";
-                }
             }
         }
     }
