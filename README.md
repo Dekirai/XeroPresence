@@ -21,5 +21,22 @@ Every 5 seconds it updates your current game state
 3. Enter the "Access Key ID" and "Secret Access Key" in the textboxes
 4. Click "Start Presence"
 
+## Adding more profiles
+1. Create a file named "profiles.ini"
+2. Open it with a text editor of your choice
+3. Copy and paste the template below into it
+4. Replace it with your data
 
-![image](https://i.imgur.com/UoEm2PD.png)![image](https://i.imgur.com/ttVW6Zh.png)
+```ini
+[Account 1]
+AccessKeyID=12349a02da2d
+SecretAccessKey=awdkapodaw012390
+[Account 2]
+AccessKeyID=12349a02da2d
+SecretAccessKey=awdkapodaw012390
+[Account 3]
+AccessKeyID=12349a02da2d
+SecretAccessKey=awdkapodaw012390```
+
+
+![image](https://i.imgur.com/iOZdBX3.png)![image](https://i.imgur.com/ttVW6Zh.png)

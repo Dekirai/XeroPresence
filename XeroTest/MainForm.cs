@@ -4,12 +4,14 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using File = System.IO.File;
 using IWshRuntimeLibrary;
+using System.Text;
 
 namespace XeroPresence
 {
     public partial class MainForm : Form
     {
         private static DiscordRpcClient discord;
+        private Dictionary<string, Dictionary<string, string>> iniData;
         public static bool _discordLoggedIn = false;
 
         public static int _pen = 0;
@@ -71,6 +73,8 @@ namespace XeroPresence
         public MainForm()
         {
             InitializeComponent();
+            iniData = new Dictionary<string, Dictionary<string, string>>();
+            LoadIniFile("profiles.ini");
         }
 
         private static void InitializeDiscord()
@@ -705,6 +709,43 @@ namespace XeroPresence
             _newsmallassettext = "";
         }
 
+        private void LoadIniFile(string filePath)
+        {
+            iniData.Clear();
+            string currentSection = "";
+
+            try
+            {
+                foreach (string line in File.ReadLines(filePath, Encoding.UTF8))
+                {
+                    if (line.StartsWith("[") && line.EndsWith("]"))
+                    {
+                        currentSection = line.Trim('[', ']');
+                        iniData[currentSection] = new Dictionary<string, string>();
+                    }
+                    else if (!string.IsNullOrEmpty(currentSection))
+                    {
+                        string[] parts = line.Split('=');
+                        if (parts.Length == 2)
+                        {
+                            string key = parts[0].Trim();
+                            string value = parts[1].Trim();
+                            iniData[currentSection][key] = value;
+                        }
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                // File was not found
+            }
+
+            foreach (var section in iniData.Keys)
+            {
+                cb_Profiles.Items.Add(section);
+            }
+        }
+
         private void bt_save_Click(object sender, EventArgs e)
         {
             Settings.Default.accesskey = tb_accesskey.Text;
@@ -713,6 +754,31 @@ namespace XeroPresence
             Settings.Default.tray = cb_HideInTray.Checked;
             Settings.Default.showlevel = cb_ShowLevel.Checked;
             Settings.Default.Save();
+        }
+
+        private void cb_Profiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedSection = cb_Profiles.SelectedItem.ToString();
+            if (iniData.ContainsKey(selectedSection))
+            {
+                if (iniData[selectedSection].ContainsKey("AccessKeyID"))
+                {
+                    tb_accesskey.Text = iniData[selectedSection]["AccessKeyID"];
+                }
+                else
+                {
+                    tb_accesskey.Text = "Key not found";
+                }
+
+                if (iniData[selectedSection].ContainsKey("SecretAccessKey"))
+                {
+                    tb_accesskeysecret.Text = iniData[selectedSection]["SecretAccessKey"];
+                }
+                else
+                {
+                    tb_accesskeysecret.Text = "Key not found";
+                }
+            }
         }
     }
 }

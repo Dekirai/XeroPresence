@@ -39,6 +39,8 @@
             notifyIcon = new NotifyIcon(components);
             bt_save = new Button();
             groupBox1 = new GroupBox();
+            cb_Profiles = new ComboBox();
+            label2 = new Label();
             cb_ShowLevel = new CheckBox();
             cb_HideInTray = new CheckBox();
             cb_StartWithWindows = new CheckBox();
@@ -111,6 +113,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cb_Profiles);
+            groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(cb_ShowLevel);
             groupBox1.Controls.Add(cb_HideInTray);
             groupBox1.Controls.Add(cb_StartWithWindows);
@@ -120,6 +124,25 @@
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Settings";
+            // 
+            // cb_Profiles
+            // 
+            cb_Profiles.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_Profiles.FormattingEnabled = true;
+            cb_Profiles.Location = new Point(146, 37);
+            cb_Profiles.Name = "cb_Profiles";
+            cb_Profiles.Size = new Size(121, 23);
+            cb_Profiles.TabIndex = 13;
+            cb_Profiles.SelectedIndexChanged += cb_Profiles_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(164, 19);
+            label2.Name = "label2";
+            label2.Size = new Size(87, 15);
+            label2.TabIndex = 12;
+            label2.Text = "Select a profile:";
             // 
             // cb_ShowLevel
             // 
@@ -193,5 +216,7 @@
         private CheckBox cb_HideInTray;
         private CheckBox cb_StartWithWindows;
         private CheckBox cb_ShowLevel;
+        private ComboBox cb_Profiles;
+        private Label label2;
     }
 }
