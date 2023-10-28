@@ -99,7 +99,7 @@ namespace XeroPresence
             try
             {
                 string customtext = "";
-                Process[] xero = Process.GetProcessesByName("xerogames");
+                Process[] xero = Process.GetProcessesByName("xerogame");
 
                 //We do not want to send requests to the API if the game isn't even running
                 if (xero.Length == 0)
